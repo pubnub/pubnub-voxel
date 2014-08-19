@@ -5,6 +5,7 @@ var voxel = require('voxel')
 var extend = require('extend')
 var fly = require('voxel-fly')
 var walk = require('voxel-walk')
+var pubnub = require('pubnub')
 
 module.exports = function(opts, setup) {
   setup = setup || defaultSetup

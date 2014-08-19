@@ -13,7 +13,8 @@
     "voxel-fly": "~0.1.0",
     "voxel-walk": "git://github.com/flyswatter/voxel-walk.git",
     "extend": "1.1.3",
-    "voxel-texture": "^0.5.8"
+    "voxel-texture": "^0.5.8",
+    "pubnub": "^3.6.7"
   },
   "devDependencies": {
     "browserify": "1.17.3",
