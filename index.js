@@ -6,11 +6,15 @@ var extend = require('extend')
 var fly = require('voxel-fly')
 var skin = require('minecraft-skin')
 var walk = require('voxel-walk')
+var pubnub = require('pubnub')
+
+var channel = 'pubnub-minecraft'
 
 var a_player = function(game) {
-
+  
   var createPlayer = player(game);
-  return createPlayer('player.png')
+  return createPlayer('player.png');
+
 }
 
 module.exports = function(opts, setup) {
