@@ -4,8 +4,14 @@ var player = require('voxel-player')
 var voxel = require('voxel')
 var extend = require('extend')
 var fly = require('voxel-fly')
+var skin = require('minecraft-skin')
 var walk = require('voxel-walk')
-var pubnub = require('pubnub')
+
+var a_player = function(game) {
+
+  var createPlayer = player(game);
+  return createPlayer('player.png')
+}
 
 module.exports = function(opts, setup) {
   setup = setup || defaultSetup
@@ -28,13 +34,15 @@ module.exports = function(opts, setup) {
   game.appendTo(container)
   if (game.notCapable()) return game
   
-  var createPlayer = player(game)
 
   // create the player from a minecraft skin file and tell the
   // game to use it as the main player
-  var avatar = createPlayer(opts.playerSkin || 'player.png')
+  var avatar = a_player(game);
   avatar.possess()
-  avatar.yaw.position.set(2, 14, 4)
+  avatar.yaw.position.set(2, 4, 4)
+
+  var viking = a_player(game);
+  viking.position.set(2, 4, 4)
 
   setup(game, avatar)
   
