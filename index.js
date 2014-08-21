@@ -23,7 +23,7 @@ module.exports = function(opts, setup) {
     materials: [
       ['grass', 'dirt', 'grass_dirt']
     ],
-    texturePath: './textures/',
+    texturePath: window.location + '/textures/',
     worldOrigin: [0, 0, 0],
     controls: { discreteFire: true }
   }
