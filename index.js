@@ -5,7 +5,6 @@ var voxel = require('voxel')
 var extend = require('extend')
 var fly = require('voxel-fly')
 var skin = require('minecraft-skin')
-var walk = require('voxel-walk')
 var uuid = window.PUBNUB.uuid();
 var pubnub = window.PUBNUB.init({
   publish_key: 'demo',
@@ -23,7 +22,7 @@ module.exports = function(opts, setup) {
     materials: [
       ['grass', 'dirt', 'grass_dirt']
     ],
-    texturePath: window.location + '/textures/',
+    texturePath: window.location.href + '/textures/',
     worldOrigin: [0, 0, 0],
     controls: { discreteFire: true }
   }
