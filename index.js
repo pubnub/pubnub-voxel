@@ -23,7 +23,7 @@ module.exports = function(opts, setup) {
     materials: [
       ['grass', 'dirt', 'grass_dirt']
     ],
-    texturePath: '../textures/',
+    texturePath: './textures/',
     worldOrigin: [0, 0, 0],
     controls: { discreteFire: true }
   }
@@ -88,6 +88,10 @@ module.exports = function(opts, setup) {
   
     if (ev.keyCode === 'R'.charCodeAt(0)) self.avatar.toggle()
 
+  });
+
+  setInterval(function(){
+
     pubnub.publish({
       channel: channel,        
       message: {
@@ -96,7 +100,7 @@ module.exports = function(opts, setup) {
       }
     });
 
-  });
+  }, 250);
 
   game.on('tick', function() {
 
