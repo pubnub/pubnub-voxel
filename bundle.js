@@ -442,7 +442,6 @@ var voxel = require('voxel')
 var extend = require('extend')
 var fly = require('voxel-fly')
 var skin = require('minecraft-skin')
-var walk = require('voxel-walk')
 var uuid = window.PUBNUB.uuid();
 var pubnub = window.PUBNUB.init({
   publish_key: 'demo',
@@ -460,7 +459,7 @@ module.exports = function(opts, setup) {
     materials: [
       ['grass', 'dirt', 'grass_dirt']
     ],
-    texturePath: '../textures/',
+    texturePath: window.location.href + '/textures/',
     worldOrigin: [0, 0, 0],
     controls: { discreteFire: true }
   }
@@ -525,6 +524,10 @@ module.exports = function(opts, setup) {
   
     if (ev.keyCode === 'R'.charCodeAt(0)) self.avatar.toggle()
 
+  });
+
+  setInterval(function(){
+
     pubnub.publish({
       channel: channel,        
       message: {
@@ -533,7 +536,7 @@ module.exports = function(opts, setup) {
       }
     });
 
-  });
+  }, 250);
 
   game.on('tick', function() {
 
@@ -48389,64 +48392,6 @@ Skin.prototype.createPlayerObject = function(scene) {
   playerGroup.add(playerRotation);
   playerGroup.scale = this.scale
   return playerGroup
-}
-});
-
-require.define("/node_modules/voxel-walk/package.json",function(require,module,exports,__dirname,__filename,process,global){module.exports = {}
-});
-
-require.define("/node_modules/voxel-walk/index.js",function(require,module,exports,__dirname,__filename,process,global){var walkSpeed = 1.0
-var startedWalking = 0.0
-var stoppedWalking = 0.0
-var walking = false
-var acceleration = 1.0
-
-exports.render = function(skin){
-  var time = Date.now() / 1000
-  if (walking && time < startedWalking + acceleration){
-    walkSpeed = (time - startedWalking) / acceleration
-  }
-  if (!walking && time < stoppedWalking + acceleration){
-    walkSpeed = -1 / acceleration * (time - stoppedWalking) + 1
-  }
-
-  skin.head.rotation.y = Math.sin(time * 1.5) / 3 * walkSpeed
-  skin.head.rotation.z = Math.sin(time) / 2 * walkSpeed
-  
-  skin.rightArm.rotation.z = 2 * Math.cos(0.6662 * time * 10 + Math.PI) * walkSpeed
-  skin.rightArm.rotation.x = 1 * (Math.cos(0.2812 * time * 10) - 1) * walkSpeed
-  skin.leftArm.rotation.z = 2 * Math.cos(0.6662 * time * 10) * walkSpeed
-  skin.leftArm.rotation.x = 1 * (Math.cos(0.2312 * time * 10) + 1) * walkSpeed
-  
-  skin.rightLeg.rotation.z = 1.4 * Math.cos(0.6662 * time * 10) * walkSpeed
-  skin.leftLeg.rotation.z = 1.4 * Math.cos(0.6662 * time * 10 + Math.PI) * walkSpeed
-}
-
-exports.startWalking = function(){
-  var now = Date.now() / 1000
-  walking = true
-  if (stoppedWalking + acceleration>now){
-    var progress = now - stoppedWalking;
-    startedWalking = now - (stoppedWalking + acceleration - now)
-  } else {
-    startedWalking = Date.now() / 1000
-  }
-}
-exports.stopWalking = function() {
-  var now = Date.now() / 1000
-  walking = false
-  if (startedWalking + acceleration > now){
-    stoppedWalking = now - (startedWalking + acceleration - now)
-  } else {
-    stoppedWalking = Date.now() / 1000
-  }
-}
-exports.isWalking = function(){
-  return walking
-}
-
-exports.setAcceleration = function(newA){
-  acceleration = newA
 }
 });
 
