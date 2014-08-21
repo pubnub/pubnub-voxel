@@ -5,6 +5,7 @@ var voxel = require('voxel')
 var extend = require('extend')
 var fly = require('voxel-fly')
 var skin = require('minecraft-skin')
+var walk = require('voxel-walk')
 var uuid = window.PUBNUB.uuid();
 var pubnub = window.PUBNUB.init({
   publish_key: 'demo',
@@ -99,7 +100,7 @@ module.exports = function(opts, setup) {
       }
     });
 
-  }, 250);
+  }, 300);
 
   game.on('tick', function() {
 
